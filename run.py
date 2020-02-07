@@ -1,4 +1,5 @@
 import requests
+from requests.auth import HTTPBasicAuth
 import yaml
 import os
 
@@ -22,7 +23,9 @@ def do_call(configuration):
     options['params'] = configuration.get('params', None)
     options['headers'] = configuration.get('headers', None)
     options['data'] = configuration.get('data', None)
-    options['auth'] = configuration.get('auth', None)
+    auth = configuration.get('auth', None)
+    if auth is not None:
+        options['auth'] = HTTPBasicAuth(auth[0], auth[1])
 
     print(f"Calling: {method} {url}")
     response = operation(url, **options)
