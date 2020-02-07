@@ -1,0 +1,3 @@
+sequencial:
+  - url: https://google.com
+    method: GET
